@@ -509,16 +509,48 @@
 %	PAGE LAYOUT
 %----------------------------------------------------------------------------------------
 
-% Set the default page layout
-\RequirePackage[
+\iffalse 
+% defaults
+\usepackage[
 	a4paper,
+	%paperwidth=21.0cm,
+	%paperheight=29.7cm,
 	bottom=27.4mm,
 	inner=24.8mm,
+	%outer=24.8mm,
+	%right=2.183cm,
 	textwidth=107mm,
 	marginparsep=8.2mm,
 	marginparwidth=49.4mm,
+	%textheight=49\baselineskip,
 	includemp
 ]{geometry}
+
+\else
+
+% underneath code of Lana instead of above code
+
+\newlength{\phdpaperheight}
+\setlength{\phdpaperheight}{240mm}
+\newlength{\phdpaperwidth}
+\setlength{\phdpaperwidth}{160mm}
+
+\usepackage[
+  paperwidth=\phdpaperwidth,
+  paperheight=\phdpaperheight,
+  width=120mm,
+  height=180mm,
+  bottom = 27.4 mm,
+  inner = 24.8mm,
+%  width=125mm, %ads
+%  height=185mm, %ads
+   textwidth=80mm,
+   marginparsep=1mm, %5mm, %8.2mm,
+   marginparwidth=5mm, %30mm, %49.4mm,
+   %textheight=49\baselineskip,
+   includemp
+]{geometry}
+\fi
 
 % Command to print a blank page
 \newcommand\blankpage{%
@@ -535,16 +567,19 @@
 }
 
 % Layout #1: large margins
-\newcommand{\marginlayout}{%
+\newcommand{\marginlayout}{
 	\newgeometry{
-		top=27.4mm,
-		bottom=27.4mm,
-		inner=24.8mm,
-		textwidth=107mm,
-		marginparsep=8.2mm,
-		marginparwidth=49.4mm,
+		top=20mm, 
+		bottom=20mm, 
+		inner=15mm,
+		%outer=24.8mm,
+		%right=2.183cm,
+		textwidth = 80mm, 
+		marginparsep = 8mm, 
+		marginparwidth = 40mm, 
+		%textheight=49\baselineskip,
 		includemp
-	}%
+	}
 }
 
 % Layout #2: no margins at all
