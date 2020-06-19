@@ -114,13 +114,27 @@
 }
 
 %----------------------------------------------------------------------------------------
+%	NEWTHOUGHT
+%----------------------------------------------------------------------------------------
+
+\providecommand\newthought[1]{%
+   \addvspace{1.0\baselineskip plus 0.5ex minus 0.2ex}%
+   \noindent\textsc{#1}%
+}
+
+%----------------------------------------------------------------------------------------
 %	CHAPTER HEADING STYLES
 %----------------------------------------------------------------------------------------
+
+\newlength{\lengthline}
+\newlength{\lengthvspace}
+\setlength{\lengthvspace}{-30mm}  % top margin is 30 mm
 
 \DeclareDocumentCommand{\setchapterstyle}{m}{%
 	\ifthenelse{\equal{plain}{#1}}{\chapterstyleplain}{}
 	\ifthenelse{\equal{lines}{#1}}{\chapterstylelines}{}
 	\ifthenelse{\equal{kao}{#1}}{\chapterstylekao}{}
+	\ifthenelse{\equal{kaoshort}{#1}}{\chapterstylekaoshort}{}
 }
 
 % The default definition in KOMA script
@@ -140,11 +154,23 @@
 	\renewcommand*{\chapterformat}{%
 		\mbox{\chapappifchapterprefix{\nobreakspace}\scalebox{2.85}{\thechapter\autodot}}%
 	}
+	% \ifthenelse{\equal{\@layout}{wide}}
 	\renewcommand\chapterlinesformat[3]{%
-		\vspace*{-4.5cm}%
+		\StrLen{##3}[\temp]
+		\ifnum\temp>50
+			\setlength{\lengthline}{4.7cm} % longer line for longer (multiline) titles	
+		\else
+			\ifnum\temp>25
+				\setlength{\lengthline}{4.7cm} % longer line for longer (multiline) titles	
+			\else
+				\setlength{\lengthline}{4.2cm} % longer line for longer (multiline) titles
+			\fi	
+		\fi
+	
+		\vspace*{\lengthvspace}%
 		\makebox[\textwidth+\marginparsep+\marginparwidth]{%
 			\parbox[b]{\textwidth}{\flushright{##3}}%
-			\makebox[\marginparsep][c]{\rule[-.2cm]{1pt}{5.7cm}}%
+			\makebox[\marginparsep][c]{\rule[-.2cm]{1pt}{\lengthline}}
 			\parbox[b]{\marginparwidth}{##2}%
 		}
 	}

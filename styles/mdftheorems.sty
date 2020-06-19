@@ -20,11 +20,13 @@
 % Use mdframed to shade the background of theorems
 
 \let\openbox\relax
-\usepackage{amsmath} % Improved mathematics
+\usepackage{mathtools} % added by Lana, loads amsmath
+% \usepackage{amsmath} % Improved mathematics
 \usepackage{amsfonts} % Mathematical fonts
-%\usepackage{amssymb} % AMS symbols and environments
+\usepackage{amssymb} % AMS symbols and environments
 \usepackage{amsthm} % Mathematical environments
 \usepackage{thmtools}
+
 
 \usepackage{siunitx}
 \DeclareSIUnit\Molar{\textsc{m}}
@@ -38,6 +40,8 @@
 
 \usepackage{tikz}
 \usepackage[framemethod=TikZ]{mdframed}
+
+\usetikzlibrary{arrows.meta} % Lana for stealth arrowhead for activation
 
 % Box style
 \mdfsetup{skipabove=\topskip,skipbelow=0pt}%-.5\topskip}
@@ -203,6 +207,16 @@
 		frametitlebackgroundcolor=Goldenrod!45!white,
 	},
 ]{example}
+
+\declaretheorem[
+	name=May's instability criterion,
+	numbered=no,
+	mdframed={
+		style=mdfkao,
+		backgroundcolor=Goldenrod!45!white,
+		frametitlebackgroundcolor=Goldenrod!45!white,
+	},
+]{may_criterion}
 
 %\renewcommand{\thetheorem}{\arabic{chapter}.\arabic{section}.\arabic{theorem}}
 %\renewcommand{\thetheorem}{\arabic{subsection}.\arabic{theorem}}

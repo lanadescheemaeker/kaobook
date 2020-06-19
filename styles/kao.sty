@@ -6,7 +6,7 @@
 % This template originates from:
 % https://www.LaTeXTemplates.com
 %
-% For the latest template development version and to make contributions:
+% For the latest templatef development version and to make contributions:
 % https://github.com/fmarotta/kaobook
 %
 % Authors:
@@ -36,6 +36,9 @@
 \RequirePackage{xpatch} % Patch LaTeX code in external packages
 \RequirePackage{xstring} % Parse strings
 \RequirePackage{afterpage} % Run commands after specific pages
+
+% Lana in casu
+\newcommand*{\ic}{i.c.\@\xspace}
 
 %----------------------------------------------------------------------------------------
 %	TITLE AND AUTHOR MACROS
@@ -234,7 +237,8 @@
 \RequirePackage{graphicx} % Include figures
 \setkeys{Gin}{width=\linewidth,totalheight=\textheight,keepaspectratio} % Improves figure scaling
 \RequirePackage{tikz} % Allows to draw custom shapes
-\RequirePackage{booktabs} % Nicer tables
+\RequirePackage{booktabs,tabu} % Nicer tables tabu by Lana
+\RequirePackage{makecell} %Lana
 \RequirePackage{multirow} % Cells occupying multiple rows in tables
 \RequirePackage{multicol} % Multiple columns in dictionary
 \RequirePackage{rotating} % Allows tables and figures to be rotated
@@ -509,7 +513,7 @@
 %	PAGE LAYOUT
 %----------------------------------------------------------------------------------------
 
-\iffalse 
+\iffalse
 % defaults
 \usepackage[
 	a4paper,
@@ -533,20 +537,21 @@
 \newlength{\phdpaperheight}
 \setlength{\phdpaperheight}{240mm}
 \newlength{\phdpaperwidth}
-\setlength{\phdpaperwidth}{160mm}
+\setlength{\phdpaperwidth}{170mm} %160mm}
+\newlength{\phdfullwidth}
+\setlength{\phdfullwidth}{135mm} % 90 + 5 + 40 mm}
 
 \usepackage[
   paperwidth=\phdpaperwidth,
   paperheight=\phdpaperheight,
-  width=120mm,
-  height=180mm,
-  bottom = 27.4 mm,
-  inner = 24.8mm,
-%  width=125mm, %ads
-%  height=185mm, %ads
-   textwidth=80mm,
-   marginparsep=1mm, %5mm, %8.2mm,
-   marginparwidth=5mm, %30mm, %49.4mm,
+  %width=120mm,
+  %height=180mm,
+  top = 30 mm,
+  bottom = 20 mm,
+  inner = 20mm,
+  textwidth=90mm, % or 160 paperwidth and 80 textwidth
+   marginparsep=5mm, %5mm, %8.2mm,
+   marginparwidth=40mm, %5mm, %30mm, %49.4mm,
    %textheight=49\baselineskip,
    includemp
 ]{geometry}
@@ -570,16 +575,17 @@
 \newcommand{\marginlayout}{
 	\newgeometry{
 		top=20mm, 
-		bottom=20mm, 
-		inner=15mm,
+		bottom=20mm,
+		inner=20mm,
 		%outer=24.8mm,
 		%right=2.183cm,
-		textwidth = 80mm, 
-		marginparsep = 8mm, 
+		textwidth = 90mm,
+		marginparsep = 5mm, 
 		marginparwidth = 40mm, 
 		%textheight=49\baselineskip,
 		includemp
 	}
+	\def\@layout{margin}
 }
 
 % Layout #2: no margins at all
@@ -589,10 +595,11 @@
 		bottom=27.4mm,
 		inner=24.8mm,
 		outer=24.8mm,
-		marginparsep=0mm,
+		marginparsep=5mm, % needed to align chapter title
 		marginparwidth=0mm,
 		ignoremp,
 	}%
+	\def\@layout{wide}
 }
 
 % Layout #3: no margins and no space above or below the body
@@ -606,6 +613,7 @@
 		marginparsep=0cm,
 		ignoremp
 	}%
+	\def\@layout{fullwidth}
 }
 
 % Set the default page layout
@@ -693,7 +701,7 @@
 	\setmonofont[
 		Scale=.89
 	]{Liberation Mono}
-	\setmathfont{Libertinus Math}
+	\setmathfont[Scale=0.8]{Libertinus Math}
 \else
 	\RequirePackage[utf8]{inputenc} % utf8 encoding in the input (.tex) file
 	\RequirePackage[T1]{fontenc} % utf8 encoding in the output (.pdf) file
@@ -799,9 +807,25 @@
 }
 
 %----------------------------------------------------------------------------------------
+%	QUOTE BEGINNING CHAPTER (LANA)
+%----------------------------------------------------------------------------------------
+
+\RequirePackage[palatino]{quotchap}
+
+\def\signed #1{{\leavevmode\unskip\nobreak\hfil\penalty50\hskip2em
+  \hbox{}\nobreak\hfil#1%
+  \parfillskip=0pt \finalhyphendemerits=0 \endgraf}}
+
+\newsavebox\mybox
+\newenvironment{aquote}[1]
+  {\savebox\mybox{#1}\begin{quote}}
+  {\signed{\usebox\mybox}\end{quote}}
+  
+%----------------------------------------------------------------------------------------
 %	INCLUDE ADDITIONAL PACKAGES
 %----------------------------------------------------------------------------------------
 
 \RequirePackage{styles/environments}
 \RequirePackage{styles/packages}
 \RequirePackage{styles/kaorefs}
+\RequirePackage{styles/vub}
