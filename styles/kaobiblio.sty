@@ -29,6 +29,8 @@
 % use this package to use bibentry in publication list, LANA
 \usepackage{bibentry}
 
+\bibliographystyle{vancouver-elife}
+
 %----------------------------------------------------------------------------------------
 %	ORIGINAL KAOBOOK
 %----------------------------------------------------------------------------------------
@@ -117,7 +119,6 @@
 %----------------------------------------------------------------------------------------
 %	APALIKE
 %----------------------------------------------------------------------------------------
-
 \else
 
 % https://tex.stackexchange.com/questions/48023/mimic-bibtex-apalike-with-biblatex-biblatex-apa-broken
@@ -270,6 +271,8 @@ backrefpages = {cited on pages}, %{cited on pp\adddot}
 
 \fi
 
+
+
 %----------------------------------------------------------------------------------------
 %	CITATION COMMANDS
 %----------------------------------------------------------------------------------------
@@ -311,7 +314,8 @@ backrefpages = {cited on pages}, %{cited on pp\adddot}
 	\clearfield{pagetotal}%
 	\clearfield{edition}%
 	\clearfield{issn}%
-	\clearfield{doi}%
+	\clearfield{language}
+	%\clearfield{doi}%
 	\usedriver
 	{\DeclareNameAlias{sortname}{default}}
 	{\thefield{entrytype}}

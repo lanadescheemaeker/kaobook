@@ -118,7 +118,7 @@
 %----------------------------------------------------------------------------------------
 
 \providecommand\newthought[1]{%
-   \addvspace{1.0\baselineskip plus 0.5ex minus 0.2ex}%
+   %\addvspace{1.0\baselineskip plus 0.5ex minus 0.2ex}%
    \noindent\textsc{#1}%
 }
 
@@ -157,10 +157,10 @@
 	% \ifthenelse{\equal{\@layout}{wide}}
 	\renewcommand\chapterlinesformat[3]{%
 		\StrLen{##3}[\temp]
-		\ifnum\temp>50
-			\setlength{\lengthline}{4.7cm} % longer line for longer (multiline) titles	
+		\ifnum\temp>\@longtitle
+			\setlength{\lengthline}{5.2cm} % longer line for longer (multiline) titles	
 		\else
-			\ifnum\temp>25
+			\ifnum\temp>\@mediumtitle
 				\setlength{\lengthline}{4.7cm} % longer line for longer (multiline) titles	
 			\else
 				\setlength{\lengthline}{4.2cm} % longer line for longer (multiline) titles

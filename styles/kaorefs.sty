@@ -64,6 +64,11 @@
 \newcommand{\BOX}[1]{\autoref{box:#1}}
 \newcommand{\CHAP}[1]{\autoref{chap:#1}}
 \newcommand{\SEC}[1]{\autoref{sec:#1}}
+%\newcommand{\PART}[1]{\autoref{part:#1}}
+\newcommand{\PART}[1]{\hyperref[part:#1]{\partname}\xspace`\nameref{part:#1}'} % Part `Name of the Part'
+
+\renewcommand{\chapterautorefname}{Chapter}
+\renewcommand{\sectionautorefname}{Section}
 
 \newcommand{\refpage}[1]{\hyperref[#1]{\pagename}\xspace\pageref{page:#1}} % Page 84
 \newcommand{\vrefpage}[1]{\vpageref*{page:#1}} % on the following page, on page 84
@@ -131,3 +136,9 @@
 
 \newcommand{\refexercise}[1]{\hyperref[exercise:#1]{Exercise}\xspace\ref{exercise:#1}}
 \newcommand{\vrefexercise}[1]{\hyperref[exercise:#1]{Exercise}\xspace\vref{exercise:#1}}
+
+%%%% FIGURE CREDITS (Lana)
+
+\addtotoclist[]{fcf}
+\DeclareRobustCommand{\figurecredit}[1]{\addcontentsline{fcf}{figure}{\protect\numberline{\thefigure}#1}}
+\newcommand*{\listoffigurecredits}{\listoftoc[Figures credits]{fcf}}
